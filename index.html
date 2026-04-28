@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenAI-трансформация — Вебинар Just AI x Альфа-Банк</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        .meta-item svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .content {
+            padding: 60px 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .speakers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .speaker-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .speaker-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .speaker-card p {
+            color: #555;
+        }
+
+        .problem-list {
+            display: grid;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .problem-item {
+            background: #fff5f5;
+            border-left: 5px solid #f56565;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .problem-item h4 {
+            color: #c53030;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #667eea;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 20px;
+            width: 15px;
+            height: 15px;
+            background: #667eea;
+            border: 3px solid white;
+            border-radius: 50%;
+        }
+
+        .timeline-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .timeline-item .duration {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 30px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .checklist {
+            background: #f0fff4;
+            border-left: 5px solid #48bb78;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .checklist h4 {
+            color: #2f855a;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .checklist ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .checklist li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .audience {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .audience-card {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .highlight-box p {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .questions-section {
+            background: #fffbeb;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        .questions-section h4 {
+            color: #d69e2e;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .questions-section ul {
+            padding-left: 20px;
+        }
+
+        .questions-section li {
+            margin-bottom: 10px;
+        }
+
+        .action-plan {
+            background: #e6fffa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header .subtitle {
+                font-size: 1.1em;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .meta-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        .key-point {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #f39c12;
+        }
+
+        .key-point strong {
+            color: #d35400;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>GenAI-трансформация</h1>
+            <div class="subtitle">Как запустить конвейер гипотез и не платить за ошибки</div>
+
+            <div class="meta-info">
+                <div class="meta-item">
+                    <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                    <span>26 мая 2026</span>
+                </div>
+                <div class="meta-item">
+                    <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                    <span>45–60 минут</span>
+                </div>
+                <div class="meta-item">
+                    <svg fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                    <span>Онлайн-вебинар</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Спикеры -->
+            <div class="section">
+                <h2 class="section-title">Спикеры</h2>
+                <div class="speakers">
+                    <div class="speaker-card">
+                        <h3>Ольга Конарева</h3>
+                        <p><strong>Менеджер по развитию бизнеса</strong></p>
+                        <p>Just AI</p>
+                        <p style="margin-top: 10px; font-size: 0.95em;">Взгляд консультанта с опытом 20+ проектов AI-трансформации</p>
+                    </div>
+                    <div class="speaker-card">
+                        <h3>Ксения Михайлова</h3>
+                        <p><strong>Представитель Альфа ИТ</strong></p>
+                        <p>Альфа-Банк</p>
+                        <p style="margin-top: 10px; font-size: 0.95em;">Взгляд изнутри крупнейшего банка страны</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Зачем этот вебинар -->
+            <div class="section">
+                <h2 class="section-title">Зачем этот вебинар</h2>
+                <p style="font-size: 1.1em; margin-bottom: 20px;">Большинство крупных компаний застряли в одном из двух состояний:</p>
+
+                <div class="problem-list">
+                    <div class="problem-item">
+                        <h4>«Пилотов много — результата нет»</h4>
+                        <p>Pilot-rich, transformation-poor: компании запускают множество пилотов, но ни один не доходит до production</p>
+                    </div>
+                    <div class="problem-item">
+                        <h4>«Идеи есть — непонятно, как их тестировать»</h4>
+                        <p>Отсутствует конвейер от гипотезы до пилота и дальнейшего масштабирования</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <p>Альфа-Банк — один из немногих, кто построил работающий конвейер: от подачи идеи сотрудником до запуска пилота и масштабирования</p>
+                </div>
+            </div>
+
+            <!-- Целевая аудитория -->
+            <div class="section">
+                <h2 class="section-title">Для кого этот вебинар</h2>
+                <div class="audience">
+                    <div class="audience-card">Руководители AI-трансформации / CDTO / CIO</div>
+                    <div class="audience-card">Руководители инноваций и R&D</div>
+                    <div class="audience-card">Продуктовые лидеры</div>
+                    <div class="audience-card">HR / L&D менеджеры</div>
+                </div>
+                <div class="key-point">
+                    <strong>Что вы получите:</strong> Конкретную модель «конвейера гипотез» + чеклист запуска + понимание, где обычно ломается
+                </div>
+            </div>
+
+            <!-- Структура вебинара -->
+            <div class="section">
+                <h2 class="section-title">Программа вебинара</h2>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="duration">10 минут</span>
+                        <h4>БЛОК 1: Проблема — почему пилоты не превращаются в продукт</h4>
+                        <p><strong>Ведущая:</strong> Ольга Конарева (Just AI)</p>
+                        <ul style="margin-top: 15px; padding-left: 20px;">
+                            <li><strong>«Зоопарк пилотов»:</strong> 5–10 пилотов без приоритизации и единых критериев успеха</li>
+                            <li><strong>«Всё сделали — ничего не работает»:</strong> Нет процесса от хакатона до пилота</li>
+                            <li><strong>«Shadow AI вместо стратегии»:</strong> Хаотичные эксперименты без системы</li>
+                        </ul>
+                        <div class="key-point" style="margin-top: 15px;">
+                            <strong>Ключевой вопрос:</strong> Как превратить хаотичные эксперименты в управляемый конвейер?
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="duration">15–20 минут</span>
+                        <h4>БЛОК 2: Кейс Альфа-Банка — как устроен конвейер гипотез</h4>
+                        <p><strong>Ведущая:</strong> Ксения Михайлова (Альфа-Банк)</p>
+                        <ul style="margin-top: 15px; padding-left: 20px;">
+                            <li><strong>Стартап-среда внутри банка:</strong> любой сотрудник может предложить идею</li>
+                            <li><strong>ИИ-конвейер:</strong> система ИИ-ассистентов (Консультант, Архитектор, Скаутинг)</li>
+                            <li><strong>Платформа AlfaGen / Alfa AI:</strong> безопасность, метрики, примеры</li>
+                            <li><strong>Программа менторов:</strong> 10–20 человек, fast track от идеи до пилота</li>
+                            <li><strong>Грабли и переделки:</strong> что не сработало и что изменили</li>
+                        </ul>
+                        <div class="highlight-box" style="margin-top: 15px; text-align: left;">
+                            <strong>Результаты:</strong><br>
+                            • 30+ проектов через конвейер<br>
+                            • 4000 запросов<br>
+                            • 85% без участия специалистов<br>
+                            • Автотесты на 70% быстрее<br>
+                            • Документация: с месяцев до дней
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="duration">10 минут</span>
+                        <h4>БЛОК 3: Диалог — модель конвейера гипотез</h4>
+                        <p><strong>Ведущие:</strong> Ольга + Ксения</p>
+                        <div class="table-container" style="margin-top: 15px;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Элемент</th>
+                                        <th>Что это</th>
+                                        <th>На чём ломается</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>1. Сбор идей</strong></td>
+                                        <td>Канал подачи идей сотрудниками</td>
+                                        <td>Нет канала / идеи тонут / сложная форма</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>2. Фильтр</strong></td>
+                                        <td>Критерии отбора по ценности и реализуемости</td>
+                                        <td>Нет критериев / всё «важное» / политика</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>3. Песочница</strong></td>
+                                        <td>Безопасная среда для прототипа</td>
+                                        <td>Нет среды / данных / времени</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>4. Пилот</strong></td>
+                                        <td>Тестирование с реальными пользователями</td>
+                                        <td>Нет KPI / бесконечный пилот / нет владельца</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>5. Решение</strong></td>
+                                        <td>Go/no-go: масштабировать или закрыть</td>
+                                        <td>Нет процесса / не закрывают неудачные</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="key-point" style="margin-top: 15px;">
+                            <strong>Ключевой тезис:</strong> Конвейер — это не платформа. Это процесс + культура + инструменты. Платформа без процесса — деньги на ветер. Процесс без культуры — бумажка на стене.
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="duration">5–7 минут</span>
+                        <h4>БЛОК 4: Чеклист — как запустить у себя</h4>
+                        <p><strong>Ведущая:</strong> Ольга Конарева (Just AI)</p>
+
+                        <div class="checklist" style="margin-top: 15px;">
+                            <h4>Для тех, кто только начинает:</h4>
+                            <ul>
+                                <li>Начните с аудита: где shadow AI? Соберите спрос снизу</li>
+                                <li>Определите критерии «пилотопригодности»</li>
+                                <li>Создайте песочницу — хотя бы минимальную</li>
+                                <li>Договоритесь о метриках ДО старта пилота</li>
+                                <li>Назначьте «владельца конвейера» — человека, не комитет</li>
+                            </ul>
+                        </div>
+
+                        <div class="checklist">
+                            <h4>Для тех, кто уже пилотирует:</h4>
+                            <ul>
+                                <li>Проверьте: есть ли процесс ЗАКРЫТИЯ неудачных пилотов?</li>
+                                <li>Проверьте: знают ли сотрудники о результатах?</li>
+                                <li>Проверьте: есть ли менторы / амбассадоры?</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="duration">10–15 минут</span>
+                        <h4>Q&A — Вопросы и ответы</h4>
+                        <p>Модератор собирает вопросы из чата. Ольга и Ксения отвечают по очереди.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вопросы для обсуждения -->
+            <div class="section">
+                <h2 class="section-title">Вопросы для встречи с Альфа-Банком</h2>
+
+                <div class="questions-section">
+                    <h4>По содержанию:</h4>
+                    <ul>
+                        <li>Какие части конвейера можно раскрыть публично? (ИИ-ассистенты, метрики, менторы)</li>
+                        <li>Есть ли кейс от начала до конца: идея → пилот → результат?</li>
+                        <li>Что НЕ получилось? История «пробовали X — не сработало — переделали»?</li>
+                        <li>Кто ещё мог бы участвовать? (Екатерина Соловьева, Дмитрий Манафов?)</li>
+                        <li>Нужно ли согласование с PR / коммуникациями?</li>
+                    </ul>
+                </div>
+
+                <div class="questions-section">
+                    <h4>По формату:</h4>
+                    <ul>
+                        <li>Формат «диалог» комфортен? Или два отдельных выступления + Q&A?</li>
+                        <li>Сколько времени на подготовку? (Прогон за неделю до)</li>
+                        <li>Презентация: одна общая или у каждого своя?</li>
+                        <li>Дата 26 мая подходит?</li>
+                    </ul>
+                </div>
+
+                <div class="questions-section">
+                    <h4>По согласованию:</h4>
+                    <ul>
+                        <li>Что нужно от Ивана Корсея (руководитель Ксении)?</li>
+                        <li>Можно ли упоминать AlfaGen / Alfa AI по названию?</li>
+                        <li>Есть ли ограничения по NDA?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- План действий -->
+            <div class="section">
+                <h2 class="section-title">План подготовки к вебинару</h2>
+                <div class="action-plan">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Что</th>
+                                    <th>Кто</th>
+                                    <th>Когда</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Встреча с Ксенией — обсудить сценарий</td>
+                                    <td>Ольга + Ксения</td>
+                                    <td><strong>Вт, 29 апреля, 15:00</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Уточнение раскрываемых деталей + согласование участия</td>
+                                    <td>Ксения</td>
+                                    <td>До 5 мая</td>
+                                </tr>
+                                <tr>
+                                    <td>Финальный сценарий с распределением ролей</td>
+                                    <td>Ольга</td>
+                                    <td>До 7 мая</td>
+                                </tr>
+                                <tr>
+                                    <td>Презентация (1 общая или 2 раздельных)</td>
+                                    <td>Ольга + Ксения</td>
+                                    <td>До 14 мая</td>
+                                </tr>
+                                <tr>
+                                    <td>Прогон с ведущей (маркетинг Just AI)</td>
+                                    <td>Все</td>
+                                    <td>19–20 мая</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ВЕБИНАР</strong></td>
+                                    <td></td>
+                                    <td><strong>26 мая</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
